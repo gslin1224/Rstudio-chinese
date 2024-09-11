@@ -1,7 +1,7 @@
 version: '3'
 services:
   rstudio:
-    image: gslin1224/rstudio-chinese  
+    image: rstudio-chinese  
     container_name: rstudio_server_chinese            
     environment:
       - PASSWORD=password                             
