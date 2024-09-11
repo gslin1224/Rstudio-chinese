@@ -6,7 +6,7 @@ The default RStudio setup does not properly support Chinese characters, especial
 ### Instructions
 
 1. Building the Docker Image
-To build the image, use the provided Dockerfile. Run the following command in the same directory as the Dockerfile:
+To build the image, use the provided Dockerfile. Run the following command in the same directory as the Dockerfile:  
 `docker build -t rstudio-chinese .`
 You can modify the Dockerfile if needed, such as adjusting environment variables or adding new packages.
 
@@ -15,7 +15,7 @@ To run the container, use the provided docker-compose.yml. If you want to custom
 
 Change the image name under image:
 Update the password in the environment: section
-Then, run the following command:
+Then, run the following command:  
 `docker-compose up -d`
 # 支持中文的 RStudio
 ## 動機
