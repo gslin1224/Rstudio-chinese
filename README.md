@@ -1,42 +1,85 @@
 # RStudio with Chinese Language Support
-## Motivation
 
-The default RStudio setup does not properly support Chinese characters, especially when generating plots with Chinese labels. This repository aims to solve the issue by providing a pre-configured Docker environment that enables RStudio to display Chinese characters correctly in both the UI and plots.
+## English Instructions
 
-### Instructions
+### Running with Docker Compose
 
-1. Building the Docker Image
-To build the image, use the provided Dockerfile. Run the following command in the same directory as the Dockerfile:
+To run the container, simply use the provided `docker-compose.yml` file. There is no need to manually build the image, as the pre-configured image is already available for use.
 
-`docker build -t rstudio-chinese .`
-You can modify the Dockerfile if needed, such as adjusting environment variables or adding new packages.
+If you want to customize the image or environment variables, you can modify the `docker-compose.yml` file:
 
-3. Running with Docker Compose
-To run the container, use the provided docker-compose.yml. If you want to customize the image or environment variables, you can modify the docker-compose.yml file. For example:
+- Change the image name under `image:`.
+- Update the password in the `environment:` section.
 
-Change the image name under image:
-Update the password in the environment: section
-Then, run the following command:  
+To start the container, run:
 
-`docker-compose up -d`
-# 支持中文的 RStudio
-## 動機
+```sh
+docker-compose up -d
+```
 
-默認的 RStudio 設置在顯示中文字符時（特別是生成包含中文標籤的圖表）會出現問題。本倉庫提供了一個預配置的 Docker 環境，可以讓 RStudio 正確顯示中文字符，無論是在用戶界面還是圖表中。
+This command will start the RStudio container with proper Chinese language support out-of-the-box.
 
-### 使用說明
+### Building with Dockerfile
 
-1. 建立 Docker images
-建立images時，可以使用倉庫中的 Dockerfile。在與 Dockerfile 相同的目錄下運行以下命令：
+If you prefer to build the Docker image manually using the Dockerfile, follow these steps:
 
-`docker build -t rstudio-chinese .`
-您可以根據需要修改 Dockerfile，例如調整環境變量或添加新的包。
+1. **Build the Docker Image**
 
-3. 使用 Docker Compose 運行
-要運行容器，可以使用倉庫中的 docker-compose.yml 文件。如果需要自定義images或環境變量，您可以修改 docker-compose.yml 文件。例如：
+   Navigate to the directory containing the Dockerfile and run the following command to build the Docker image:
 
-更改 image: 下的images名稱
-更新 environment: 部分中的密碼
-然後運行以下命令：  
+   ```sh
+   docker build -t custom-rstudio-chinese .
+   ```
 
-`docker-compose up -d`
+2. **Run the Docker Container**
+
+   Once the image is built, you can run the container with the following command:
+
+   ```sh
+   docker run -d -p 8787:8787 -e PASSWORD=password -e LANG=zh_TW.UTF-8 -e LC_ALL=zh_TW.UTF-8 --name rstudio_server_chinese custom-rstudio-chinese
+   ```
+
+   This will start the RStudio server container, using the custom-built image with proper Chinese language support.
+
+---
+
+## 中文說明
+
+### 使用 Docker Compose 運行
+
+要運行容器，只需使用倉庫中提供的 `docker-compose.yml` 文件。無需手動構建鏡像，因為預配置的鏡像已可供使用。
+
+如果需要自定義鏡像或環境變量，您可以修改 `docker-compose.yml` 文件：
+
+- 更改 `image:` 下的鏡像名稱。
+- 更新 `environment:` 部分中的密碼。
+
+運行以下命令來啟動容器：
+
+```sh
+docker-compose up -d
+```
+
+這個命令將啟動一個開箱即用、具備正確中文支持的 RStudio 容器。
+
+### 使用 Dockerfile 構建
+
+如果您更喜歡使用 Dockerfile 手動構建 Docker 鏡像，請按照以下步驟進行：
+
+1. **構建 Docker 鏡像**
+
+   進入包含 Dockerfile 的目錄，並運行以下命令來構建 Docker 鏡像：
+
+   ```sh
+   docker build -t custom-rstudio-chinese .
+   ```
+
+2. **運行 Docker 容器**
+
+   鏡像構建完成後，您可以使用以下命令來運行容器：
+
+   ```sh
+   docker run -d -p 8787:8787 -e PASSWORD=password -e LANG=zh_TW.UTF-8 -e LC_ALL=zh_TW.UTF-8 --name rstudio_server_chinese custom-rstudio-chinese
+   ```
+
+   這將使用自定義構建的鏡像啟動 RStudio 服務器容器，具備正確的中文支持。
