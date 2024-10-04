@@ -1,16 +1,20 @@
 version: '3'
 services:
   rstudio:
-    image: rstudio-chinese  
-    container_name: rstudio_server_chinese            
+    image: rocker/rstudio:latest  
+    container_name: rstudio_server_chinese
     environment:
-      - PASSWORD=password                             
-      - LANG=zh_TW.UTF-8                           
+      - PASSWORD=password         
+      - LANG=zh_TW.UTF-8          
       - LC_ALL=zh_TW.UTF-8
     ports:
-      - "8787:8787"                              
+      - "8787:8787"              
     volumes:
-      - ./project:/home/rstudio/project              
+      - ./:/home/rstudio/project  
       - ./rstudio_library:/usr/local/lib/R/site-library  
-    restart: unless-stopped                         
-
+    restart: unless-stopped     
+    command: >
+      bash -c "apt-get update &&
+               apt-get install -y locales fonts-noto-cjk &&
+               locale-gen zh_TW.UTF-8 &&
+               /init"
