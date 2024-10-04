@@ -1,0 +1,17 @@
+version: '3'
+services:
+  rstudio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rstudio_server_chinese
+    environment:
+      - PASSWORD=password
+      - LANG=zh_TW.UTF-8
+      - LC_ALL=zh_TW.UTF-8
+    ports:
+      - "8787:8787"
+    volumes:
+      - ./project:/home/rstudio/project
+      - ./rstudio_library:/usr/local/lib/R/site-library
+    restart: unless-stopped
